@@ -10,13 +10,9 @@ export const WeatherContext = createContext<Weather | null>(null)
 export default function Searchbar(): JSX.Element {
     const [search, setSearch] = useState<string>('');
     const { setData, setForecastData } = useWeatherData()
-    const savedState = localStorage.getItem('myState')
-    console.log(savedState)
-    const city = savedState ? savedState : 'osaka'
-    console.log(city)
 
-    //Runs on every refresh
     useEffect(() => {
+        const city = localStorage.getItem('myState')
         fetch(`${data().baseUrl}weather?q=${city}&units=metric&APPID=${data().key}`, {
             cache: 'no-store'
         })
@@ -26,15 +22,16 @@ export default function Searchbar(): JSX.Element {
                 setData(result)
             })
 
-    }, [])
+    }, [setData])
 
     useEffect(() => {
+        const city = localStorage.getItem('myState')
         fetch(`${data().baseUrl}forecast?q=${city}&units=metric&APPID=${data().key}`)
             .then((res) => res.json())
             .then((result) => {
                 setForecastData(result)
             })
-    }, [])
+    }, [setForecastData])
 
     const handleSearch = (event: React.KeyboardEvent) => {
 

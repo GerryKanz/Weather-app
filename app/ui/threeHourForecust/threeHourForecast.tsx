@@ -1,7 +1,7 @@
 import { useWeatherData } from "../dataContext"
 import dataApi from "@/app/api"
 import Image from "next/image"
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useState, useRef, useCallback } from "react"
 import { Weather } from "../interfaces"
 import MoreCardDetail from "../moreCardDetail"
 import SunriseSunset from "./sunRiseSunset"
@@ -11,25 +11,23 @@ export default function ThreeHourFocust() {
     const forecastList = weatherData.forecastData?.list
     const datelist = Array.from(new Set(forecastList?.map(dates => dates['dt_txt'].split(' ')[0])));
 
-    const cardInit = () => { if (forecastList) return forecastList[0] }
-    console.log(cardInit())
+    const cardInit = useCallback(() => { if (forecastList) return forecastList[0] }, [forecastList])
 
 
     const [selectedDate, setSelectedDate] = useState<string | undefined>()
 
     const [cardInfo, setCardInfo] = useState<Weather | undefined>()
-    // const [dateIndex, setDateIndex] = useState<string>()
 
     const scrollRef = useRef<HTMLUListElement>(null);
 
     useEffect(() => {
         console.log('select date use effect ran')
         setSelectedDate(datelist[0])
-    }, [datelist[0]])
+    }, [datelist])
 
     useEffect(() => {
         setCardInfo(cardInit())
-    }, [forecastList])
+    }, [forecastList, cardInit])
 
 
     console.log(selectedDate)
@@ -45,33 +43,10 @@ export default function ThreeHourFocust() {
 
     }
 
-
-
-    // const time = (time: string) => {
-    //     return time.split(' ')[1]
-    // }
-
-    console.log(selectedDate)
-
-
-
     const handleCardDisplay = (date: string) => {
         setSelectedDate(date)
         resetScroll()
     }
-
-    // const handleDisplayMoreCardInfo = (cardInformation: Weather) => {
-    //     setCardInfo(cardInformation)
-    //     console.log('card info logging')
-    // }
-
-    // useEffect(() => {
-    //     console.log(cardInfo)
-    //     setCard(cardInfo)
-    // }, [cardInfo])
-
-    // )
-
 
     const formatDateString = (dateString: string | undefined) => {
         if (dateString != undefined) {
