@@ -26,7 +26,9 @@ export default function Searchbar(): JSX.Element {
 
     useEffect(() => {
         const city = localStorage.getItem('myState')
-        fetch(`${data().baseUrl}forecast?q=${city}&units=metric&APPID=${data().key}`)
+        fetch(`${data().baseUrl}forecast?q=${city}&units=metric&APPID=${data().key}`, {
+            cache: 'no-store'
+        })
             .then((res) => res.json())
             .then((result) => {
                 setForecastData(result)
@@ -37,7 +39,9 @@ export default function Searchbar(): JSX.Element {
 
         if (event.key == 'Enter') {
             const timestamp = new Date().getTime()
-            fetch(`${data().baseUrl}weather?q=${search}&units=metric&APPID=${data().key}&ts=${timestamp}`)
+            fetch(`${data().baseUrl}weather?q=${search}&units=metric&APPID=${data().key}&ts=${timestamp}`, {
+                cache: 'no-store'
+            })
                 .then((res) => res.json())
                 .then((result) => {
                     console.log(result)
@@ -46,7 +50,9 @@ export default function Searchbar(): JSX.Element {
                     setData(result)
                 })
 
-            fetch(`${data().baseUrl}forecast?q=${search}&units=metric&APPID=${data().key}&ts=${timestamp}`)
+            fetch(`${data().baseUrl}forecast?q=${search}&units=metric&APPID=${data().key}&ts=${timestamp}`, {
+                cache: 'no-store'
+            })
                 .then((res) => res.json())
                 .then((result) => {
                     setForecastData(result)
