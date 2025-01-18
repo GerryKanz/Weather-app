@@ -6,7 +6,7 @@ import Time from "./UnixToStdTime"
 
 export default function Today() {
     const { data } = useWeatherData()
-    const imgUrl = `${dataApi().baseUrl}img/w/${data?.weather[0].icon}.png`
+    // const imgUrl = `${dataApi().baseUrl}img/w/${data?.weather[0].icon}.png`
 
     const time = () => {
         return Time(data?.dt as number)
@@ -28,10 +28,10 @@ export default function Today() {
             </div>
             <>
                 {
-                    imgUrl ? <div className="flex flex-col mt-10 w-3/4 h-1/2 rounded-xl text-white self-center bg-slate-400">
+                    data?.weather[0] ? <div className="flex flex-col mt-10 w-3/4 h-1/2 rounded-xl text-white self-center bg-slate-400">
                         <p className="text-xl text-center font-bold p-2 mt-1">{time()}</p>
                         <Image
-                            src={imgUrl}
+                            src={`${dataApi().baseUrl}img/w/${data?.weather[0].icon}.png`}
                             alt="new"
                             width={120}
                             height={120}
