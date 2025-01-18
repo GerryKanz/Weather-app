@@ -12,8 +12,7 @@ export default function Searchbar(): JSX.Element {
     const { setData, setForecastData } = useWeatherData()
 
     useEffect(() => {
-        const city = localStorage.getItem('myState')
-        fetch(`${data().baseUrl}weather?q=${city}&units=metric&APPID=${data().key}`, {
+        fetch(`${data().baseUrl}weather?q=osaka&units=metric&APPID=${data().key}`, {
             cache: 'no-store'
         })
             .then((res) => res.json())
@@ -25,8 +24,8 @@ export default function Searchbar(): JSX.Element {
     }, [setData])
 
     useEffect(() => {
-        const city = localStorage.getItem('myState')
-        fetch(`${data().baseUrl}forecast?q=${city}&units=metric&APPID=${data().key}`, {
+        // const city = localStorage.getItem('myState')
+        fetch(`${data().baseUrl}forecast?q=osaka&units=metric&APPID=${data().key}`, {
             cache: 'no-store'
         })
             .then((res) => res.json())
@@ -45,7 +44,7 @@ export default function Searchbar(): JSX.Element {
                 .then((res) => res.json())
                 .then((result) => {
                     console.log(result)
-                    localStorage.setItem('myState', `${search}`)
+                    // localStorage.setItem('myState', `${search}`)
                     console.log(typeof (result))
                     setData(result)
                 })
@@ -57,8 +56,6 @@ export default function Searchbar(): JSX.Element {
                 .then((result) => {
                     setForecastData(result)
                 })
-
-
         }
 
     }
