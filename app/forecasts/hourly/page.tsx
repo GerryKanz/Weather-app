@@ -1,3 +1,6 @@
+// import Image from "next/image";
+// import Logo from '@/app/ui/logo';
+// import Search from '@/app/ui/search'
 import Today from '@/app/ui/today';
 
 
