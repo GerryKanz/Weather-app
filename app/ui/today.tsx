@@ -7,7 +7,6 @@ import Time from "./UnixToStdTime"
 export default function Today() {
     const { data } = useWeatherData()
     const imgUrl = `${dataApi().baseUrl}img/w/${data?.weather[0].icon}.png`
-    // const time = Time(data?.dt)
 
     const time = () => {
         return Time(data?.dt as number)

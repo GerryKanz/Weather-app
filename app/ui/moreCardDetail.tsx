@@ -1,7 +1,5 @@
 "use client"
-import { useEffect, useState } from "react"
-import { useWeatherData } from "./dataContext"
-import { Weather, weatherForecast } from "./interfaces"
+import { Weather } from "./interfaces"
 import { WiHumidity, WiUmbrella, WiThermometer, WiStrongWind, WiSnowflakeCold } from "react-icons/wi";
 
 export default function MoreCardDetail({ weather, main, wind, rain, snow }: Weather) {

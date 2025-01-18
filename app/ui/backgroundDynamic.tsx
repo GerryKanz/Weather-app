@@ -1,4 +1,3 @@
-// src/components/DynamicBackground.js
 import React from 'react';
 
 const DynamicBackground = (imageUrl: string) => {

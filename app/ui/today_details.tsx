@@ -1,4 +1,3 @@
-import SunriseSunset from "./threeHourForecust/sunRiseSunset";
 import ThreeHourFocust from "./threeHourForecust/threeHourForecast";
 
 export default function Today_details() {

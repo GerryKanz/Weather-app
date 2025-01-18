@@ -2,7 +2,7 @@ import { useWeatherData } from "../dataContext"
 import dataApi from "@/app/api"
 import Image from "next/image"
 import { useEffect, useState, useRef } from "react"
-import { Weather, weatherContextType, weatherForecast } from "../interfaces"
+import { Weather } from "../interfaces"
 import MoreCardDetail from "../moreCardDetail"
 import SunriseSunset from "./sunRiseSunset"
 
