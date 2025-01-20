@@ -6,13 +6,13 @@ import { useWeatherData } from "./dataContext"
 
 export default function DataProvider() {
 
-    const cond = useWeatherData().data?.weather[0]
-    const condition = cond?.main as string
+    const cond = useWeatherData().data?.weather[0].main
+    // const condition = cond?.main as string
 
 
     return <div className={`font-manrope text-lg antialiased relative
-    ${condition == 'Clear' ? `bg-[url('./src/assets/pexels-skitterphoto-3768.jpg')]` :
-            condition == 'Clouds' ? `bg-[url('./src/assets/pexels-shadylurker-631342.jpg')]` : null}  bg-cover pb-6`}>
+    ${cond == 'Clear' ? `bg-[url('./src/assets/pexels-skitterphoto-3768.jpg')]` :
+            cond == 'Clouds' ? `bg-[url('./src/assets/pexels-shadylurker-631342.jpg')]` : null}  bg-cover pb-6`}>
 
         <div className='flex flex-row justify-between'>
             <Logo />

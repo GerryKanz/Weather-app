@@ -10,6 +10,7 @@ export default function ThreeHourFocust() {
     const weatherData = useWeatherData()
     const forecastList = weatherData.forecastData?.list
     const datelist = Array.from(new Set(forecastList?.map(dates => dates['dt_txt'].split(' ')[0])));
+    const inputDate = datelist[0]
 
     const cardInit = useCallback(() => { if (forecastList) return forecastList[0] }, [forecastList])
 
@@ -21,16 +22,16 @@ export default function ThreeHourFocust() {
     const scrollRef = useRef<HTMLUListElement>(null);
 
     useEffect(() => {
-        console.log('select date use effect ran')
-        setSelectedDate(datelist[0])
-    }, [datelist])
+        // console.log('select date use effect ran')
+        setSelectedDate(inputDate)
+    }, [inputDate])
 
     useEffect(() => {
         setCardInfo(cardInit())
     }, [forecastList, cardInit])
 
 
-    console.log(selectedDate)
+    // console.log(selectedDate)
 
     const resetScroll = () => {
         if (scrollRef.current) {
