@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, createContext, useEffect } from "react";
+import { useState, createContext, useEffect, useRef } from "react";
 import data from "../api";
 import { Weather } from "./interfaces";
 import { useWeatherData } from "./dataContext";
@@ -11,6 +11,7 @@ export default function Searchbar(): JSX.Element {
     const [search, setSearch] = useState<string>('');
     const { setData, setForecastData } = useWeatherData()
     const [searchRes, setSearchRes] = useState('')
+    const inputRef = useRef<HTMLInputElement>(null)
 
     useEffect(() => {
         fetch(`${data().baseUrl}weather?q=osaka&units=metric&APPID=${data().key}`, {
@@ -25,7 +26,6 @@ export default function Searchbar(): JSX.Element {
     }, [setData])
 
     useEffect(() => {
-        // const city = localStorage.getItem('myState')
         fetch(`${data().baseUrl}forecast?q=osaka&units=metric&APPID=${data().key}`, {
             cache: 'no-store'
         })
@@ -35,44 +35,59 @@ export default function Searchbar(): JSX.Element {
             })
     }, [setForecastData])
 
-    const handleSearch = (event: React.KeyboardEvent) => {
+    const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setSearch(event.target.value)
+    }
 
-        if (event.key == 'Enter') {
-            const timestamp = new Date().getTime()
+    const handleSearch = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === "Enter") {
+            event.preventDefault();
+
+            if (search.trim() === "") return;
+
+            const timestamp = new Date().getTime();
+
             fetch(`${data().baseUrl}weather?q=${search}&units=metric&APPID=${data().key}&ts=${timestamp}`, {
-                cache: 'no-store'
+                cache: 'no-store',
             })
                 .then((res) => {
                     if (!res.ok) {
-                        setSearchRes(`${search} not found please try again`)
-                        throw new Error(`HTTP error! Status: ${res.status}`)
-                    } else res.json()
-                        .then((result) => {
-                            setSearchRes('')
-                            setData(result)
-                        })
-
+                        setSearchRes(`${search} not found. Please try again.`);
+                        throw new Error(`HTTP error! Status: ${res.status}`);
+                    }
+                    return res.json();
                 })
+                .then((result) => {
+                    setSearchRes("");
+                    setData(result);
+                })
+                .catch((error) => console.error("Error fetching weather data:", error));
 
             fetch(`${data().baseUrl}forecast?q=${search}&units=metric&APPID=${data().key}&ts=${timestamp}`, {
-                cache: 'no-store'
-            }).then((res) => {
-                if (!res.ok) {
-                    throw new Error(`HTTP error! Status: ${res.status}`)
-                } else res.json()
-                    .then((result) => {
-                        setForecastData(result)
-                    })
-
+                cache: 'no-store',
             })
+                .then((res) => {
+                    if (!res.ok) {
+                        throw new Error(`HTTP error! Status: ${res.status}`);
+                    }
+                    return res.json();
+                })
+                .then((result) => {
+                    setForecastData(result);
+                })
+                .catch((error) => console.error("Error fetching forecast data:", error));
 
+            setSearch("");
+            inputRef.current?.blur()
         }
-    }
+
+    };
 
     return (
         <>
             <div className="md:w-1/4 h-12 mt-5 mx-5 ">
-                <input onKeyDown={handleSearch} onChange={(e) => setSearch(e.target.value)} className="placeholder:text-center p-2 md:flex-1 border-2 rounded-full" name="searchbar" placeholder="Enter City / Town" />
+                <input ref={inputRef} onKeyDown={handleSearch} onChange={handleOnChange} className="placeholder:text-center p-2 md:flex-1 border-2 rounded-full"
+                    value={search} name="searchbar" placeholder="Enter City / Town" />
                 {searchRes != '' ? <p className="bg-slate-50 inline-block rounded-full p-2 mt-2 text-red-600">{searchRes}</p> : null}
             </div >
         </>

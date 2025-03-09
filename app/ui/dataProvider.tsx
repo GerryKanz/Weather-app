@@ -7,7 +7,7 @@ import { useWeatherData } from "./dataContext"
 export default function DataProvider() {
 
     const cond = useWeatherData().data?.weather[0].main
-    // const condition = cond?.main as string
+
 
 
     return <div className={`font-manrope text-lg antialiased relative
