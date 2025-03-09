@@ -73,7 +73,7 @@ export default function Searchbar(): JSX.Element {
         <>
             <div className="md:w-1/4 h-12 mt-5 mx-5 ">
                 <input onKeyDown={handleSearch} onChange={(e) => setSearch(e.target.value)} className="placeholder:text-center p-2 md:flex-1 border-2 rounded-full" name="searchbar" placeholder="Enter City / Town" />
-                <p className="bg-slate-50 inline-block rounded-full p-2 mt-2 text-red-600">{searchRes}</p>
+                {searchRes != '' ? <p className="bg-slate-50 inline-block rounded-full p-2 mt-2 text-red-600">{searchRes}</p> : null}
             </div >
         </>
     )
