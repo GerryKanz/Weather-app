@@ -20,7 +20,7 @@ export default function Today() {
 
     return <div className="font-manrope">
 
-        <div className="bg-slate-100 mt-11 pb-8 rounded-md flex flex-col text-black">
+        <div className="bg-slate-100 mt-11 pb-7 rounded-md flex flex-col text-black">
 
             <div className="self-center">
                 <p className="text-center text-4xl mt-5">Today </p>
@@ -40,7 +40,7 @@ export default function Today() {
                             {data?.weather[0].description}
                         </p>
 
-                        <p className=" mt-5 text-center text-4xl font-bold">{roundUp(data?.main?.temp)}°C</p>
+                        <p className=" mt-5 text-center text-5xl font-bold">{roundUp(data?.main?.temp)}°C</p>
 
                         <div className="flex justify-center mb-10">
                             <p className="self-center font-bold m-2">
