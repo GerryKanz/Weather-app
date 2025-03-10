@@ -27,26 +27,3 @@ export const useWeatherData = (): weatherContextType => {
     }
     return context;
 };
-
-
-
-
-
-
-
-
-
-// export default function WeatherDataProvider({ children }: { children: ReactNode }) {
-//     const [data, setData] = useState<weather | null>(null)
-//     return <weatherDataContext.Provider value={{ data, setData }}>
-//         {children}
-//     </weatherDataContext.Provider>
-// }
-
-// export const useData = (): weatherContextType => {
-//     const context = useContext(weatherDataContext);
-//     if (!context) {
-//         throw new Error("useData must be used within a WeatherDataProvider");
-//     }
-//     return context;
-// };
