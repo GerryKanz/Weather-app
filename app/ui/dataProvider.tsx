@@ -10,9 +10,10 @@ export default function DataProvider() {
 
 
 
-    return <div className={`font-manrope text-lg antialiased relative
+    return <div className={`font-manrope text-lg antialiased fixed top-0 w-full
     ${cond == 'Clear' ? `bg-[url('./src/assets/pexels-skitterphoto-3768.jpg')]` :
-            cond == 'Clouds' ? `bg-[url('./src/assets/pexels-shadylurker-631342.jpg')]` : null}  bg-cover pb-6`}>
+            cond == 'Clouds' ? `bg-[url('./src/assets/pexels-shadylurker-631342.jpg')]` :
+                cond == 'Rain' ? `bg-[url('./src/assets/pexels-lum3n-44775-1028600.jpg')]` : null}  bg-cover pb-6`}>
 
         <div className='flex flex-row justify-between'>
             <Logo />

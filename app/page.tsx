@@ -15,7 +15,7 @@ import ThreeHourFocust from './ui/threeHourForecust/threeHourForecast';
 export default function Home(): JSX.Element {
 
     return (
-        <div className={`text-black mx-2 md:mx-0 md:flex flex-row`} >
+        <div className={`text-black mt-44 mx-2 md:mx-0 md:flex flex-row`} >
 
             <div className='md:w-1/4 gap-x-4  md:ml-5'>
                 <Today />
