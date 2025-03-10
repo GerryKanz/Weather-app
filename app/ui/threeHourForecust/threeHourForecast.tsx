@@ -63,20 +63,19 @@ export default function ThreeHourFocust() {
         </div>
 
         <div className="bg-slate-100 rounded">
-            <ul className="flex h-12 md:justify-evenly overflow-x-scroll no-scrollbar">
+            <ul className="bg-slate-200 border rounded flex h-16 md:justify-evenly overflow-x-scroll no-scrollbar">
                 {datelist.map((date, index) => (
                     <li key={index} className="text-sm text-nowrap ml-5 md:text-lg mt-4">
                         {formatDateString(date) == formatDateString(selectedDate) ?
                             <a onClick={() => handleCardDisplay(date)}
                                 className="border-teal-300 border-b-2 font-bold pb-1">{formatDateString(date)}</a> :
-                            <a href="#" onClick={() => handleCardDisplay(date)} className="border-b-2 border-slate-300 pb-1">{formatDateString(date)}</a>
+                            <a onClick={() => handleCardDisplay(date)} className="border-b-2 border-slate-300 pb-1">{formatDateString(date)}</a>
                         }
-
                     </li>
                 ))}
             </ul>
 
-            <ul ref={scrollRef} className="flex justify-evenly mt-8 overflow-x-scroll no-scrollbar ml-2">
+            <ul ref={scrollRef} className="flex justify-evenly mt-4 overflow-x-scroll no-scrollbar ml-2">
                 {forecastList?.map((forecastData, index) => (
 
                     <li key={index}>
@@ -85,7 +84,7 @@ export default function ThreeHourFocust() {
                         {selectedDate != undefined ? forecastData.dt_txt.split(' ')[0] >= selectedDate ?
 
 
-                            <a href="#" onClick={() => setCardInfo(forecastData)} className="flex flex-col items-center bg-slate-300 text-black w-52 p-2 rounded mx-2">
+                            <div onClick={() => setCardInfo(forecastData)} className="flex flex-col items-center bg-slate-300 text-black w-52 p-2 rounded mx-2">
                                 <p className="my-2 font-bold">{formatDateString(forecastData.dt_txt.split(' ')[0])}</p>
 
                                 <p>{forecastData.dt_txt.split(' ')[1].slice(0, -3)}</p>
@@ -107,7 +106,7 @@ export default function ThreeHourFocust() {
                                     <p>feels like</p>
                                     <p>{Math.round(forecastData.main.feels_like)}°C</p>
                                 </div>
-                            </a> : null : null}
+                            </div> : null : null}
                     </li>
                 ))
 
