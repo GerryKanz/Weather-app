@@ -43,16 +43,18 @@ export default function Searchbar(): JSX.Element {
         if (event.key === "Enter") {
             event.preventDefault();
 
-            if (search.trim() === "") return;
+            const city = search.trim()
+
+            if (city === "") return;
 
             const timestamp = new Date().getTime();
 
-            fetch(`${data().baseUrl}weather?q=${search}&units=metric&APPID=${data().key}&ts=${timestamp}`, {
+            fetch(`${data().baseUrl}weather?q=${city}&units=metric&APPID=${data().key}&ts=${timestamp}`, {
                 cache: 'no-store',
             })
                 .then((res) => {
                     if (!res.ok) {
-                        setSearchRes(`${search} not found.`);
+                        setSearchRes(`${city} not found.`);
                         throw new Error(`HTTP error! Status: ${res.status}`);
                     }
                     return res.json();
@@ -63,7 +65,7 @@ export default function Searchbar(): JSX.Element {
                 })
                 .catch((error) => console.error("Error fetching weather data:", error));
 
-            fetch(`${data().baseUrl}forecast?q=${search}&units=metric&APPID=${data().key}&ts=${timestamp}`, {
+            fetch(`${data().baseUrl}forecast?q=${city}&units=metric&APPID=${data().key}&ts=${timestamp}`, {
                 cache: 'no-store',
             })
                 .then((res) => {
