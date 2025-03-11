@@ -94,7 +94,7 @@ export default function Searchbar(): JSX.Element {
                     value={search}
                     name="searchbar"
                     placeholder="Enter City / Town"
-                    className="placeholder:text-center pl-2 w-full h-10  border-2 border-black/60 rounded-full" />
+                    className="placeholder:text-center pl-2 w-full h-10  border-2 border-black/60 rounded-full outline-none" />
 
                 {searchRes != '' ? <p className="absolute mt-1 md:mt-2 w-full text-center  bg-slate-300 text-sm rounded-full text-red-600">City/Town not found.</p> : null}
             </div >
