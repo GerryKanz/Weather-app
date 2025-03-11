@@ -85,7 +85,7 @@ export default function Searchbar(): JSX.Element {
 
     return (
         <>
-            <div className="w-80 ml-32 relative min-h-10 mt-5 text-base ">
+            <div className="w-80 ml-10 md:ml-32 relative min-h-10 mt-5 text-base ">
 
                 <input
                     ref={inputRef}
