@@ -85,7 +85,7 @@ export default function Searchbar(): JSX.Element {
 
     return (
         <>
-            <div className="w-80 ml-10 md:ml-32 relative min-h-10 mt-5 text-base ">
+            <div className="w-80 ml-10 md:ml-32 relative min-h-10 mt-5 mr-1 text-base ">
 
                 <input
                     ref={inputRef}
@@ -94,9 +94,9 @@ export default function Searchbar(): JSX.Element {
                     value={search}
                     name="searchbar"
                     placeholder="Enter City / Town"
-                    className="placeholder:text-center w-48 h-10  border-2 border-black/60 rounded-full" />
+                    className="placeholder:text-center w-full h-10  border-2 border-black/60 rounded-full" />
 
-                {searchRes != '' ? <p className="absolute mt-1 md:mt-2 w-48 text-center  bg-slate-300 text-sm rounded-full text-red-600">City/Town not found.</p> : null}
+                {searchRes != '' ? <p className="absolute mt-1 md:mt-2 w-full text-center  bg-slate-300 text-sm rounded-full text-red-600">City/Town not found.</p> : null}
             </div >
         </>
     )
