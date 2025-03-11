@@ -52,7 +52,7 @@ export default function Searchbar(): JSX.Element {
             })
                 .then((res) => {
                     if (!res.ok) {
-                        setSearchRes(`${search} not found. Please try again.`);
+                        setSearchRes(`${search} not found.`);
                         throw new Error(`HTTP error! Status: ${res.status}`);
                     }
                     return res.json();
@@ -85,7 +85,7 @@ export default function Searchbar(): JSX.Element {
 
     return (
         <>
-            <div className="w-80 flex flex-col min-h-10 mt-5 mx-2 text-base ">
+            <div className="w-80 ml-32 relative min-h-10 mt-5 text-base ">
 
                 <input
                     ref={inputRef}
@@ -94,9 +94,9 @@ export default function Searchbar(): JSX.Element {
                     value={search}
                     name="searchbar"
                     placeholder="Enter City / Town"
-                    className="placeholder:text-center p-2 max-sm:w-40 border-2 border-black/60 rounded-full" />
+                    className="placeholder:text-center w-48 h-10  border-2 border-black/60 rounded-full" />
 
-                {searchRes != '' ? <p className="bg-slate-300 rounded p-2 mt-2 text-red-600">{searchRes}</p> : null}
+                {searchRes != '' ? <p className="absolute mt-1 md:mt-2 w-48 text-center  bg-slate-300 text-sm rounded-full text-red-600">City/Town not found.</p> : null}
             </div >
         </>
     )
